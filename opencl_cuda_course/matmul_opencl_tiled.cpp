@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <CL/cl.h>
 #include <iostream>
-#define M 512
+#define M 1024
 #define N 1024
 #define K 1024
-#define TILE_SIZE 16
+#define TILE_SIZE 32
 
 static const char* kernelSource =
 "__kernel void matmul_shared(__global float* a, __global float* b, __global float* c,"

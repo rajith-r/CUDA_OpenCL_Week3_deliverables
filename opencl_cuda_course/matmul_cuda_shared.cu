@@ -8,8 +8,8 @@ __global__ void matmul_shared(float *a, float *b, float *c, int M, int  N,  int 
 	int tile_height = blockDim.y;
 	int tile_width = blockDim.x;
 
-	__shared__ float a_shared[16][16];
-	__shared__ float b_shared[16][16];
+	__shared__ float a_shared[32][32];
+	__shared__ float b_shared[32][32];
 
 
 	int phases = (K + tile_height - 1) / tile_height;
@@ -46,7 +46,7 @@ __global__ void matmul_shared(float *a, float *b, float *c, int M, int  N,  int 
 
 extern "C" void runCudaMatMulShared() {
 	size_t N = 1024;
-	size_t M = 512;
+	size_t M = 1024;
 	size_t K = 1024; 
 
 
@@ -75,18 +75,18 @@ extern "C" void runCudaMatMulShared() {
 	cudaMemcpy(d_B, h_B, size_B, cudaMemcpyHostToDevice);
 
 
-	dim3 block(16, 16);
+	dim3 block(32, 32);
 	dim3 grid((N + block.x - 1) / block.x,(M + block.y - 1) / block.y);
-
-	// Launch kernel
-	matmul_shared << <grid, block >> > (d_A, d_B, d_C, M,N,K);
-	cudaDeviceSynchronize();
-
 	// Benchmarking
 	cudaEvent_t start, stop;
 	cudaEventCreate(&start);
 	cudaEventCreate(&stop);
 	cudaEventRecord(start);
+
+	// Launch kernel
+	matmul_shared << <grid, block >> > (d_A, d_B, d_C, M,N,K);
+	cudaDeviceSynchronize();
+
 	cudaEventRecord(stop);
 	cudaEventSynchronize(stop);
 

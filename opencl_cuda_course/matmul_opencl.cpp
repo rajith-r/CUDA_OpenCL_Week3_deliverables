@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <CL/cl.h>
 
-#define M 512
+#define M 1024
 #define N 1024
 #define K 1024
 

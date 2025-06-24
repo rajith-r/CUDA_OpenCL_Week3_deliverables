@@ -2,7 +2,7 @@
 #include <cuda_runtime.h>
 #include <stdlib.h>
 
-#define M 512
+#define M 1024
 #define N 1024
 #define K 1024
 
@@ -43,8 +43,8 @@ extern "C" void runCudaMatrixMul() {
     cudaMemcpy(d_A, h_A, sizeA, cudaMemcpyHostToDevice);
     cudaMemcpy(d_B, h_B, sizeB, cudaMemcpyHostToDevice);
 
-    dim3 threadsPerBlock(16, 16);
-    dim3 numBlocks((N + 15) / 16, (M + 15) / 16);
+    dim3 threadsPerBlock(32, 32);
+    dim3 numBlocks((N + 31) / 32, (M + 31) / 32);
 
     cudaEvent_t start, stop;
     cudaEventCreate(&start);
