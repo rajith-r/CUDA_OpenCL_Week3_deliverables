@@ -1,17 +1,17 @@
 === CUDA Matrix Multiplication ===
-CUDA kernel execution time: 11.7870 ms
+CUDA kernel execution time: 3.1877 ms
 CUDA: C[0]=1024.000000, C[M*N-1]=1024.000000
 
 === OpenCL Matrix Multiplication ===
-OpenCL kernel execution time: 1.5872 ms
+OpenCL kernel execution time: 3.4263 ms
 OpenCL: C[0]=1024.000000, C[M*N-1]=1024.000000
 
 === CUDA Matrix Multiplication with Shared Memory ===
-Kernel execution time: 0.0020 ms
+Kernel execution time: 3.3096 ms
 CUDA: C[0]=1024.000000, C[M*N-1]=1024.000000
 
 === OpenCL Matrix Multiplication with Shared Memory ===
-OpenCL kernel execution time: 1.727 ms
+OpenCL kernel execution time: 3.995 ms
 OpenCL: C[0]=1024.000000, C[M*N-1]=1024.000000
 
 === All computations completed successfully ===
